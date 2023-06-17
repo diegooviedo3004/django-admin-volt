@@ -38,12 +38,29 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
+    # Humanize
+    'django.contrib.humanize',
+
+    # Cloudinary
+    'cloudinary_storage',
+    'cloudinary',
+
+    # AUTH
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    # API
+    "corsheaders",
+
+    # WEBSITE APPS
     'app'
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -128,3 +145,36 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSRF_TRUSTED_ORIGINS = ["https://diegooviedo3004-laughing-memory-4rpwg7j7qp9hjvvp-8000.preview.app.github.dev"]
 LOGIN_REDIRECT_URL = '/'
+
+
+# AUTH
+AUTH_USER_MODEL = 'app.User'
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+
+# Cloudinary
+
+MEDIA_URL = '/media/'  # or any prefix you choose
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dolbvx3l6',
+    'API_KEY': '546194191714711',
+    'API_SECRET': '-gBY-QkYTjHPHO17kz11cD-b7Uw'
+}
+
+# CORS
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
+    "https://diegooviedo3004-laughing-memory-4rpwg7j7qp9hjvvp-8000.preview.app.github.dev"
+]
