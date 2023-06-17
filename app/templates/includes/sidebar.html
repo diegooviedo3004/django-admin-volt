@@ -42,11 +42,7 @@
       </li>
 
       <li class="nav-item {% if 'dashboard' in segment %}active{% endif %}">
-        {% if request.user.is_superuser %}
-        <a href="{% url 'admin:index' %}" class="nav-link">
-        {% else %}
         <a href="{% url 'dashboard' %}" class="nav-link">
-        {% endif %}
           <span class="sidebar-icon">
             <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
               <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
@@ -56,101 +52,6 @@
           <span class="sidebar-text">Dashboard</span>
         </a>
       </li>
-
-      {% admin_get_menu as app_list %}
-      {% if app_list %}
-        {% for app in app_list %}
-          {% if app.has_perms and not app.pinned %}
-            <li class="nav-item">
-              <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-dashboard{{app.app_label}}">
-                <span>
-                  <span class="sidebar-icon">
-                    <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd"
-                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                        clip-rule="evenodd"></path>
-                    </svg>
-                  </span>
-                  <span class="sidebar-text">{{ app.label|slice:10 }}{% if app.label|length > 10 %}..{% endif %}</span>
-                </span>
-                <span class="link-arrow">
-                  <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                      clip-rule="evenodd"></path>
-                  </svg>
-                </span>
-              </span>
-              {% if app.models %}
-                <div 
-                  class="multi-level collapse {% if 'tables-bootstrap-' in segment or app_label == app.label or app.url in request.path|urlencode %} show {% endif %}" 
-                  role="list" 
-                  id="submenu-dashboard{{app.app_label}}" 
-                  aria-expanded="{% if app_label == app.label or app.url in request.path|urlencode %}true{% else %}false{% endif %}">
-                  <ul class="flex-column nav">
-                    {% for model in app.models %}
-                      {% if model.url %}
-                        <li class="nav-item {% if 'bootstrap-tables' in segment or model.url in request.path|urlencode %} active {% endif %}">
-                          <a class="nav-link" href="{{ model.url }}">
-                            <span class="sidebar-text-contracted"> A </span>
-                            <span class="sidebar-text">{{ model.label }}</span>
-                          </a>
-                        </li>
-                      {% else %}
-                        <li class="nav-item">{{ model.label }}</li>
-                      {% endif %}
-                    {% endfor %}
-                  </ul>
-                </div> 
-              {% endif %}
-            </li>
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-
-      {% if not request.user.is_authenticated %}
-      <li class="nav-item">
-        <span class="nav-link  collapsed  d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
-          data-bs-target="#submenu-pages">
-          <span>
-            <span class="sidebar-icon">
-              <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd"
-                  d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z"
-                  clip-rule="evenodd"></path>
-                <path d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z"></path>
-              </svg>
-            </span>
-            <span class="sidebar-text">Page examples</span>
-          </span>
-          <span class="link-arrow">
-            <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd"
-                d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                clip-rule="evenodd"></path>
-            </svg>
-          </span>
-        </span>
-        <div class="multi-level collapse " role="list" id="submenu-pages" aria-expanded="false">
-          <ul class="flex-column nav">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'login' %}">
-                <span class="sidebar-text">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'register' %}">
-                <span class="sidebar-text">Sign Up</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </li>
-      {% endif %}
-
-      {% if request.user.is_authenticated and not request.user.is_superuser %}
 
       <li class="nav-item {% if 'transaction' in segment %}active{% endif %}">
         <a href="{% url 'transaction' %}" class="nav-link">
@@ -352,7 +253,6 @@
           <span>Support</span>
         </a>
       </li>
-      {% endif %}
     </ul>
   </div>
 </nav>

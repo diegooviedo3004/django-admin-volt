@@ -45,11 +45,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
 
-    # AUTH
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
     # API
     "corsheaders",
 
@@ -149,16 +144,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # AUTH
 AUTH_USER_MODEL = 'app.User'
-
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
-
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
-
-
 
 # Cloudinary
 

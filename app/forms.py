@@ -7,7 +7,7 @@ from django.contrib.auth.forms import (
     PasswordResetForm,
     SetPasswordForm,
 )
-from django.contrib.auth.models import User
+from .models import User
 from django.utils.translation import gettext_lazy as _
 
 
