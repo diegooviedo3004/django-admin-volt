@@ -5,7 +5,7 @@ Copyright (c) 2019 - present AppSeed.us
 import re
 from django import template
 from django.utils.html import format_html
-from admin_volt.utils import get_menu_items
+from app.utils import get_menu_items
 from django.utils.safestring import mark_safe
 from django.contrib.admin.views.main import PAGE_VAR
 

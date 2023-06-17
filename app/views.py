@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from admin_volt.forms import (
+from app.forms import (
     RegistrationForm,
     LoginForm,
     UserPasswordResetForm,
