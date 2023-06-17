@@ -127,4 +127,4 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 CSRF_TRUSTED_ORIGINS = ["https://diegooviedo3004-laughing-memory-4rpwg7j7qp9hjvvp-8000.preview.app.github.dev"]
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = 'dashboard'
